@@ -1,4 +1,14 @@
-overview
+download-scripts-to-your-computer
+set-up
+download-files
+locate-downloaded-files
+extract-zip-files
+organize-your-data
+start-your-development-environment
+for-pythonjupyter-notebook-users
+for-r-users
+open-a-new-notebook-or-markdown-file
+follow-the-guides
 freedom-of-press-writings
 loading-the-data
 loading-libraries

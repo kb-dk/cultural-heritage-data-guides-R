@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Cultural Heritage Data Guides - R | _main.knit</title>
+  <title>1 Set Up | _main.knit</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Cultural Heritage Data Guides - R | _main.knit" />
+  <meta property="og:title" content="1 Set Up | _main.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Cultural Heritage Data Guides - R | _main.knit" />
+  <meta name="twitter:title" content="1 Set Up | _main.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="set-up.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="freedom-of-press-writings.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -193,15 +193,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="cultural-heritage-data-guides---r" class="section level1 unnumbered hasAnchor">
-<h1>Cultural Heritage Data Guides - R<a href="index.html#cultural-heritage-data-guides---r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Welcome to these guides for working with the Royal Danish Library’s digital cultural heritage.</p>
-<p>This site contains guides in the form of R scripts that you can use to programmatically explore datasets that are made from the Royal Danish Library’s digital collections. <a href="https://kb-dk.github.io/cultural-heritage-data-guides-Python/">If you are more familiar with Python you can find Python scripts on another page.</a></p>
-<div id="download-scripts-to-your-computer" class="section level2 hasAnchor" number="0.1">
-<h2><span class="header-section-number">0.1</span> Download scripts to your computer<a href="index.html#download-scripts-to-your-computer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can download the scripts as .ipynb files or .pdf files. Find the download icon in the to menu and click on either “.ipynb” or “.pdf”</p>
+<div id="set-up" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Set Up<a href="set-up.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This guide will help you get started with downloading and setting up the datasets from the Royal Danish Library for use with our guides.</p>
+<div id="download-files" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Download Files<a href="set-up.html#download-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The datasets used in these guides are available on <a href="https://loar.kb.dk/home">LOAR (Library Open Access Repository)</a>. LOAR is a platform that the Royal Danish Library uses to share the library’s open datasets for use in research, in studies, and for the general public. You can download the datasets from LOAR to your computer and use the scripts to get started.</p>
+<ol style="list-style-type: decimal">
+<li>Visit <a href="https://loar.kb.dk/home">https://loar.kb.dk/home</a></li>
+<li>Browse or search for the dataset you need</li>
+<li>Download the dataset to your computer</li>
+</ol>
+</div>
+<div id="locate-downloaded-files" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Locate Downloaded Files<a href="set-up.html#locate-downloaded-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once the data has been downloaded, find the files in your download folder (typically <code>Downloads</code> on Windows, macOS, or Linux).</p>
+</div>
+<div id="extract-zip-files" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Extract Zip Files<a href="set-up.html#extract-zip-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Note whether the data is packaged as zip files. If it is, remember to extract the zip file before proceeding. You can extract zip files using:</p>
+<ul>
+<li><strong>Windows</strong>: Right-click the zip file and select “Extract All”</li>
+<li><strong>macOS</strong>: Double-click the zip file</li>
+<li><strong>Linux</strong>: Use <code>unzip filename.zip</code> in the terminal</li>
+</ul>
+</div>
+<div id="organize-your-data" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Organize Your Data<a href="set-up.html#organize-your-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Move the data to a folder that you can access from your Jupyter Notebook or R project.</p>
+<p><strong>Important</strong>: Create a new folder for your project data if you haven’t already. You can organize it however you prefer, for example:
+- Create a <code>data</code> folder in your project directory
+- Create a dedicated folder for each dataset
+- Organize by dataset type or analysis purpose</p>
+<p>Make sure the folder path is accessible from your working environment.</p>
+</div>
+<div id="start-your-development-environment" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Start Your Development Environment<a href="set-up.html#start-your-development-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="for-pythonjupyter-notebook-users" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> For Python/Jupyter Notebook Users<a href="set-up.html#for-pythonjupyter-notebook-users" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Install Anaconda</strong> (if not already installed):
+<ul>
+<li>Download and install Anaconda from <a href="https://www.anaconda.com/products/distribution">https://www.anaconda.com/products/distribution</a></li>
+<li>See more about the installation process: [Link to Anaconda installation guide]</li>
+</ul></li>
+<li><strong>Launch Jupyter Notebook</strong>:
+<ul>
+<li>Open Anaconda Navigator and click on “Jupyter Notebook”, or</li>
+<li>Open a terminal/command prompt and type <code>jupyter notebook</code></li>
+</ul></li>
+</ol>
+</div>
+<div id="for-r-users" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> For R Users<a href="set-up.html#for-r-users" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Install R Studio</strong> (if not already installed):
+<ul>
+<li>Download and install R Studio from <a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></li>
+<li>See more about the installation process: [Link to R Studio installation guide]</li>
+</ul></li>
+<li><strong>Launch R Studio</strong>:
+<ul>
+<li>Open R Studio from your applications or start menu</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="open-a-new-notebook-or-markdown-file" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Open a New Notebook or Markdown File<a href="set-up.html#open-a-new-notebook-or-markdown-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Jupyter Notebook</strong>: Click “New” → “Python 3” (or your preferred kernel) to create a new notebook</li>
+<li><strong>R Studio</strong>: Click “File” → “New File” → “R Markdown” to create a new R Markdown document</li>
+</ul>
+</div>
+<div id="follow-the-guides" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Follow the Guides<a href="set-up.html#follow-the-guides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once your environment is set up and your data is organized, you’re ready to follow the codes in our guides. Each guide provides step-by-step instructions and code examples to help you explore and analyze the datasets.</p>
+<p>Start by selecting a guide from the table of contents that matches the dataset you’ve downloaded, and follow along with the provided code cells.</p>
 
 </div>
 </div>
@@ -210,8 +278,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="set-up.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="freedom-of-press-writings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
