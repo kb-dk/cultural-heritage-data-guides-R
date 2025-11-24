@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<img src="../img/DKB_logo_simplified_black_RGB.png" style="display: block; margin: 0 auto; width: 50%;" alt="Description">
+<img src="./img/DKB_logo_simplified_black_RGB.png" style="display: block; margin: 0 auto; width: 50%;" alt="Description">
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
@@ -155,6 +155,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="analysis.html"><a href="analysis.html#handling-stopword"><i class="fa fa-check"></i><b>4.2</b> Handling Stopword</a></li>
 <li class="chapter" data-level="4.3" data-path="analysis.html"><a href="analysis.html#keywords-in-context-kwic-analysis"><i class="fa fa-check"></i><b>4.3</b> Keywords in Context (KWIC) Analysis</a></li>
 <li class="chapter" data-level="4.4" data-path="analysis.html"><a href="analysis.html#bigram-analysis"><i class="fa fa-check"></i><b>4.4</b> Bigram Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="loading-the-data-1.html"><a href="loading-the-data-1.html"><i class="fa fa-check"></i><b>5</b> Loading the data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="loading-the-data-1.html"><a href="loading-the-data-1.html#loading-libraries-1"><i class="fa fa-check"></i><b>5.1</b> Loading libraries</a></li>
+<li class="chapter" data-level="5.2" data-path="loading-the-data-1.html"><a href="loading-the-data-1.html#load-data-1"><i class="fa fa-check"></i><b>5.2</b> Load Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="converting-to-tidy-text-format-1.html"><a href="converting-to-tidy-text-format-1.html"><i class="fa fa-check"></i><b>6</b> Converting to Tidy Text Format</a></li>
+<li class="chapter" data-level="7" data-path="analysis-1.html"><a href="analysis-1.html"><i class="fa fa-check"></i><b>7</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="analysis-1.html"><a href="analysis-1.html#initial-analysis-1"><i class="fa fa-check"></i><b>7.1</b> Initial analysis</a></li>
+<li class="chapter" data-level="7.2" data-path="analysis-1.html"><a href="analysis-1.html#handling-stopword-1"><i class="fa fa-check"></i><b>7.2</b> Handling Stopword</a></li>
+<li class="chapter" data-level="7.3" data-path="analysis-1.html"><a href="analysis-1.html#keywords-in-context-kwic-analysis-1"><i class="fa fa-check"></i><b>7.3</b> Keywords in Context (KWIC) Analysis</a></li>
+<li class="chapter" data-level="7.4" data-path="analysis-1.html"><a href="analysis-1.html#bigram-analysis-1"><i class="fa fa-check"></i><b>7.4</b> Bigram Analysis</a></li>
 </ul></li>
 </ul>
 
@@ -179,7 +192,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="converting-to-tidy-text-format.html#cb4-1" tabindex="-1"></a>tfs_tidy <span class="ot">&lt;-</span> tfs <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="converting-to-tidy-text-format.html#cb4-2" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, content)</span></code></pre></div>
 <p>Here’s a breakdown of the code: tfs_tidy: This is a new variable where the transformed data will be stored. tfs %&gt;%: This is the pipe operator %&gt;%, which is used to chain operations together in R. It takes the data frame tfs and passes it as the first argument to the function or operation that follows. unnest_tokens(word, content): This is a function call from the tidytext package. It tokenizes the text data, breaking it down into individual words. The word argument specifies the name of the column that will contain the individual words, and the content argument specifies the column containing the text data to be tokenized. In summary, the code transforms the original data frame tfs by breaking down the text data into individual words and storing them in a new variable called tfs_tidy, making it suitable for further text analysis tasks.</p>
-
 </div>
             </section>
 
