@@ -1,20 +1,8 @@
-# Preface {-}
+# Cultural Heritage Data Guides - R {-}
 
-This repository contains the results of a text mining analysis conducted on Trykkefrihedens Skrifter using R programming language. Text mining involves extracting meaningful insights and patterns from textual data.
+Welcome to these guides for working with the Royal Danish Library's digital cultural heritage.
 
-## Overview
+This site contains guides in the form of R scripts that you can use to programmatically explore datasets that are made from the Royal Danish Library's digital collections. [If you are more familiar with Python you can find Python scripts on another page.](https://kb-dk.github.io/cultural-heritage-data-guides-Python/)
 
-Text mining techniques were applied to the Trykkefrihedens Skrifter dataset to uncover valuable information and trends within the text. The analysis aimed to understand the language, themes, and patterns present in the Skrifter.
-Methodology
-
-* Loading Data: The dataset was loaded from a CSV file named "tfs_structured.csv".
-
-* Converting to Tidy Text Format: The text data was transformed into a tidy format suitable for analysis using R packages like tidyverse and tidytext.
-
-* Initial Analysis: Basic analyses were performed to count word frequencies and understand the distribution of words in the text.
-
-* Handling Stopwords: Common stopwords in Danish and German languages, as well as project-specific stopwords, were identified and removed from the text data to focus on meaningful words.
-
-* Keywords in Context (KWIC) Analysis: A KWIC analysis was conducted to explore the context in which specific keywords appear in the text documents.
-
-* Bigrams Analysis: Bigrams, or word pairs, were analyzed to identify associations and patterns in the text.
+## Download scripts to your computer
+You can download the scripts as .ipynb files or .pdf files. Find the download icon in the to menu and click on either “.ipynb” or “.pdf”
