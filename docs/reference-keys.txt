@@ -1,5 +1,5 @@
 overview
-introduction
+freedom-of-press-writings
 loading-the-data
 loading-libraries
 load-data
@@ -9,3 +9,5 @@ initial-analysis
 handling-stopword
 keywords-in-context-kwic-analysis
 bigram-analysis
+mapping-carl-nielsens-works
+subtitle
