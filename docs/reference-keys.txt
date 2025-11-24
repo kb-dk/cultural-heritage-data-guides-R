@@ -20,4 +20,8 @@ handling-stopword
 keywords-in-context-kwic-analysis
 bigram-analysis
 mapping-carl-nielsens-works
-subtitle
+loading-libraries-1
+load-data-1
+which-authors-has-carl-nielsen-composed-most-music-to
+which-cityplace-has-seen-most-performances-of-carl-nielsen-works
+which-titles-in-which-countries

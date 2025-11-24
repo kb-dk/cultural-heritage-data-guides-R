@@ -174,7 +174,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html"><i class="fa fa-check"></i><b>3</b> Mapping Carl Nielsens Works</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#subtitle"><i class="fa fa-check"></i><b>3.1</b> Subtitle</a></li>
+<li class="chapter" data-level="3.1" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#loading-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Loading Libraries</a></li>
+<li class="chapter" data-level="3.2" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#load-data-1"><i class="fa fa-check"></i><b>3.2</b> Load data</a></li>
+<li class="chapter" data-level="3.3" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#which-authors-has-carl-nielsen-composed-most-music-to"><i class="fa fa-check"></i><b>3.3</b> Which authors has Carl Nielsen composed most music to:</a></li>
+<li class="chapter" data-level="3.4" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#which-cityplace-has-seen-most-performances-of-carl-nielsen-works"><i class="fa fa-check"></i><b>3.4</b> Which city/place has seen most performances of Carl Nielsen Works?</a></li>
+<li class="chapter" data-level="3.5" data-path="mapping-carl-nielsens-works.html"><a href="mapping-carl-nielsens-works.html#which-titles-in-which-countries"><i class="fa fa-check"></i><b>3.5</b> Which titles in which countries?</a></li>
 </ul></li>
 </ul>
 
@@ -195,8 +199,181 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mapping-carl-nielsens-works" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Mapping Carl Nielsens Works<a href="mapping-carl-nielsens-works.html#mapping-carl-nielsens-works" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="subtitle" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Subtitle<a href="mapping-carl-nielsens-works.html#subtitle" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This notebook is about analyzing the musical works of Carl Nielsen, by using digital methods.R is going to be used for examining: - Which author has Carl Nielsen composed most works for
+- Where have Carl Nielsens Works been performed?
+- Which titles were performed in which countries</p>
+<p>The overall area of interest is the Danish composer Carl Nielsen’s works. These works have been collected and organised into the platform <a href="https://www.kb.dk/dcm/cnw/about.xq">Catalogue of Carl Nielsen’s Works</a> by the former Danish Centre for Music Editing at the Royal Danish Library.
+The material used in this workshop is data extracted from the raw data used in the catalogue mentioned above. The data has then been organised in the R-data format in order to make this workshop more about analysing the data rather than parsing it.</p>
+<p>The data used on the platform <a href="https://www.kb.dk/dcm/cnw/about.xq">Catalogue of Carl Nielsen’s Works</a> is availabe in raw xml format here: <a href="https://loar.kb.dk/items/7095cffa-6c9c-42c5-b1a7-44deae920871">Download-site raw xml data for Carl Nielsen’s Works</a>.
+The catalogue uses the MEI xml format, designed to encode notated music as well as comprehensive musical metadata. The Carl Nielsen catalogue uses only the metadata part; the notated music (scores) are not included in the encoding. The MEI standard is developed and maintained by the <a href="https://music-encoding.org/">Music Encoding Initiative</a>.</p>
+<div id="loading-libraries-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Loading Libraries<a href="mapping-carl-nielsens-works.html#loading-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="mapping-carl-nielsens-works.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-2"><a href="mapping-carl-nielsens-works.html#cb21-2" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span></code></pre></div>
+</div>
+<div id="load-data-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Load data<a href="mapping-carl-nielsens-works.html#load-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mapping-carl-nielsens-works.html#cb22-1" tabindex="-1"></a>cnw <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/maxodsbjerg/MappingCarlNielsensWorks/refs/heads/main/data-output/cnw_dataframe.rds&quot;</span>))</span></code></pre></div>
+</div>
+<div id="which-authors-has-carl-nielsen-composed-most-music-to" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Which authors has Carl Nielsen composed most music to:<a href="mapping-carl-nielsens-works.html#which-authors-has-carl-nielsen-composed-most-music-to" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="mapping-carl-nielsens-works.html#cb23-1" tabindex="-1"></a>cnw <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="mapping-carl-nielsens-works.html#cb23-2" tabindex="-1"></a>  <span class="fu">filter</span>(author <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="mapping-carl-nielsens-works.html#cb23-3" tabindex="-1"></a>  <span class="fu">count</span>(author, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 103 × 2
+##    author                    n
+##    &lt;chr&gt;                 &lt;int&gt;
+##  1 N.F.S. Grundtvig         44
+##  2 Adam Oehlenschläger      17
+##  3 Helge Rode               16
+##  4 J.P. Jacobsen            15
+##  5 Jeppe Aakjær             15
+##  6 Ludvig Holstein          13
+##  7 L.C. Nielsen             11
+##  8 Hans Adolph Brorson      10
+##  9 Holger Drachmann         10
+## 10 Bjørnstjerne Bjørnson     7
+## # ℹ 93 more rows</code></pre>
+</div>
+<div id="which-cityplace-has-seen-most-performances-of-carl-nielsen-works" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Which city/place has seen most performances of Carl Nielsen Works?<a href="mapping-carl-nielsens-works.html#which-cityplace-has-seen-most-performances-of-carl-nielsen-works" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For now we’ll just look at a single work:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="mapping-carl-nielsens-works.html#cb25-1" tabindex="-1"></a>cnw <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="mapping-carl-nielsens-works.html#cb25-2" tabindex="-1"></a>  <span class="fu">filter</span>(title_da <span class="sc">==</span> <span class="st">&quot;Saul og David&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 17
+##   file       title_da title_en title_sub_da title_sub_en composer author creation classification_1 classification_2 classification_3
+##   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+## 1 ../data-c… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+## # ℹ 6 more variables: classification_4 &lt;chr&gt;, classification_5 &lt;chr&gt;, classification_6 &lt;chr&gt;, history &lt;chr&gt;, performances &lt;list&gt;,
+## #   music &lt;list&gt;</code></pre>
+<p>We see that the row under performances holds a “tibble”, which is a dataframe. This dataframe contains all the performances of Saul and David, but we cant count how many because it is in a dataframe within a row. But we can unpack this dataframe while retaining all the other information:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="mapping-carl-nielsens-works.html#cb27-1" tabindex="-1"></a>cnw <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="mapping-carl-nielsens-works.html#cb27-2" tabindex="-1"></a>  <span class="fu">filter</span>(title_da <span class="sc">==</span> <span class="st">&quot;Saul og David&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="mapping-carl-nielsens-works.html#cb27-3" tabindex="-1"></a>  <span class="fu">unnest</span>(performances)</span></code></pre></div>
+<pre><code>## # A tibble: 112 × 23
+##    file      title_da title_en title_sub_da title_sub_en composer author creation classification_1 classification_2 classification_3
+##    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+##  1 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  2 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  3 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  4 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  5 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  6 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  7 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  8 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+##  9 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+## 10 ../data-… Saul og… Saul an… Opera i fir… Opera in Fo… Carl Ni… Einar… 1899–19… Stage music      Opera            &lt;NA&gt;            
+## # ℹ 102 more rows
+## # ℹ 12 more variables: classification_4 &lt;chr&gt;, classification_5 &lt;chr&gt;, classification_6 &lt;chr&gt;, history &lt;chr&gt;, isodate &lt;chr&gt;,
+## #   startdate &lt;chr&gt;, enddate &lt;chr&gt;, place &lt;chr&gt;, venue &lt;chr&gt;, ensemble &lt;chr&gt;, conductor &lt;chr&gt;, music &lt;list&gt;</code></pre>
+<p>There is 112 performances of Saul and David. But this is just for one work. We do the same for the entire dataset and save it to a new data frame, since we are changing dramatically on the form of of the data. We’re making the shift from having one work pr. row to have one performances of a work pr. row:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="mapping-carl-nielsens-works.html#cb29-1" tabindex="-1"></a>cnw_performances <span class="ot">&lt;-</span> cnw <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="mapping-carl-nielsens-works.html#cb29-2" tabindex="-1"></a>  <span class="fu">unnest</span>(performances) </span></code></pre></div>
+<p>Since all the other data have been retained for each performances we can now count to see which work has been performened the most:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="mapping-carl-nielsens-works.html#cb30-1" tabindex="-1"></a>cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="mapping-carl-nielsens-works.html#cb30-2" tabindex="-1"></a>  <span class="fu">count</span>(title_da, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 252 × 2
+##    title_da                                                                                        n
+##    &lt;chr&gt;                                                                                       &lt;int&gt;
+##  1 &quot;Maskarade&quot;                                                                                   602
+##  2 &quot;Musik til Adam Oehlenschlägers skuespil \&quot;Aladdin eller Den forunderlige Lampe\&quot;, opus 34&quot;   211
+##  3 &quot;Jeg bærer med Smil min Byrde&quot;                                                                204
+##  4 &quot;Jens Vejmand, opus 21.3&quot;                                                                     155
+##  5 &quot;Æbleblomst, opus 10.1&quot;                                                                       121
+##  6 &quot;Saul og David&quot;                                                                               112
+##  7 &quot;Sang bag Ploven, opus 10.4&quot;                                                                   96
+##  8 &quot;Silkesko over gylden Læst!, opus 6.3&quot;                                                         96
+##  9 &quot;Musik til Helge Rodes skuespil \&quot;Moderen\&quot;, opus 41&quot;                                          92
+## 10 &quot;Suite for strygeorkester, opus 1&quot;                                                             87
+## # ℹ 242 more rows</code></pre>
+<p>Following the same logic we can also examine which city has seen the most performances:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="mapping-carl-nielsens-works.html#cb32-1" tabindex="-1"></a>cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="mapping-carl-nielsens-works.html#cb32-2" tabindex="-1"></a>  <span class="fu">count</span>(place, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 241 × 2
+##    place            n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 &quot;Copenhagen&quot;  2950
+##  2 &quot;Gothenburg&quot;   112
+##  3 &quot;Stockholm&quot;    111
+##  4 &quot;Odense&quot;        92
+##  5 &quot;Aarhus&quot;        88
+##  6 &quot;&quot;              55
+##  7 &quot;Berlin&quot;        43
+##  8 &quot;Aalborg&quot;       42
+##  9 &quot;Oslo&quot;          42
+## 10 &quot;Ryslinge&quot;      41
+## # ℹ 231 more rows</code></pre>
+<p>Copenhagen is out of proportions - lets filter it out for a nice visualisation:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mapping-carl-nielsens-works.html#cb34-1" tabindex="-1"></a>cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="mapping-carl-nielsens-works.html#cb34-2" tabindex="-1"></a>  <span class="fu">filter</span>(place <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="mapping-carl-nielsens-works.html#cb34-3" tabindex="-1"></a>  <span class="fu">filter</span>(place <span class="sc">!=</span> <span class="st">&quot;Copenhagen&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="mapping-carl-nielsens-works.html#cb34-4" tabindex="-1"></a>  <span class="fu">count</span>(place, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="mapping-carl-nielsens-works.html#cb34-5" tabindex="-1"></a>   <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-6"><a href="mapping-carl-nielsens-works.html#cb34-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">reorder</span>(place, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="mapping-carl-nielsens-works.html#cb34-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> place, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="mapping-carl-nielsens-works.html#cb34-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-9"><a href="mapping-carl-nielsens-works.html#cb34-9" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb34-10"><a href="mapping-carl-nielsens-works.html#cb34-10" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-11"><a href="mapping-carl-nielsens-works.html#cb34-11" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">&quot;Performances of Carl Nielsen works outside of Copenhagen&quot;</span>,</span>
+<span id="cb34-12"><a href="mapping-carl-nielsens-works.html#cb34-12" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;- dispersed on cities&quot;</span>,</span>
+<span id="cb34-13"><a href="mapping-carl-nielsens-works.html#cb34-13" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data from Catalogue of Carl Nielsen&#39;s Works (CNW)&quot;</span>,</span>
+<span id="cb34-14"><a href="mapping-carl-nielsens-works.html#cb34-14" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;City&quot;</span>,</span>
+<span id="cb34-15"><a href="mapping-carl-nielsens-works.html#cb34-15" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count of performances&quot;</span></span>
+<span id="cb34-16"><a href="mapping-carl-nielsens-works.html#cb34-16" tabindex="-1"></a>  ) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+</div>
+<div id="which-titles-in-which-countries" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Which titles in which countries?<a href="mapping-carl-nielsens-works.html#which-titles-in-which-countries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Load geographical data about cities with 3 or more performances of Carl Nielsen Works:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="mapping-carl-nielsens-works.html#cb35-1" tabindex="-1"></a>cnw_cities <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/maxodsbjerg/MappingCarlNielsensWorks/refs/heads/main/data-output/20241020_cnw_performances_geographical_information.rds&quot;</span>))</span></code></pre></div>
+<p>Add the geographical data to the performances data frame:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="mapping-carl-nielsens-works.html#cb36-1" tabindex="-1"></a>cnw_performances <span class="ot">&lt;-</span> cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="mapping-carl-nielsens-works.html#cb36-2" tabindex="-1"></a>  <span class="fu">left_join</span>(cnw_cities, <span class="at">by =</span> <span class="st">&quot;place&quot;</span>)</span></code></pre></div>
+<p>Dispersions of performances on country:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="mapping-carl-nielsens-works.html#cb37-1" tabindex="-1"></a>cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="mapping-carl-nielsens-works.html#cb37-2" tabindex="-1"></a>  <span class="fu">drop_na</span>(country) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="mapping-carl-nielsens-works.html#cb37-3" tabindex="-1"></a>  <span class="fu">count</span>(country, <span class="at">sort  =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 20 × 2
+##    country             n
+##    &lt;chr&gt;           &lt;int&gt;
+##  1 Danmark          3842
+##  2 Sverige           242
+##  3 Deutschland       120
+##  4 Norge              49
+##  5 Nederland          15
+##  6 France             14
+##  7 Suomi / Finland    13
+##  8 Polska              8
+##  9 United Kingdom      8
+## 10 Česko               8
+## 11 Österreich          7
+## 12 Magyarország        6
+## 13 United States       6
+## 14 Hrvatska            2
+## 15 Italia              2
+## 16 România             2
+## 17 日本                2
+## 18 España              1
+## 19 Kenya               1
+## 20 Latvija             1</code></pre>
+<p>Which titles has been performed the most in Denmark:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="mapping-carl-nielsens-works.html#cb39-1" tabindex="-1"></a>cnw_performances <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="mapping-carl-nielsens-works.html#cb39-2" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&quot;Danmark&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="mapping-carl-nielsens-works.html#cb39-3" tabindex="-1"></a>  <span class="fu">count</span>(title_da, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 251 × 2
+##    title_da                                                                                        n
+##    &lt;chr&gt;                                                                                       &lt;int&gt;
+##  1 &quot;Maskarade&quot;                                                                                   512
+##  2 &quot;Jeg bærer med Smil min Byrde&quot;                                                                195
+##  3 &quot;Musik til Adam Oehlenschlägers skuespil \&quot;Aladdin eller Den forunderlige Lampe\&quot;, opus 34&quot;   157
+##  4 &quot;Jens Vejmand, opus 21.3&quot;                                                                     149
+##  5 &quot;Æbleblomst, opus 10.1&quot;                                                                       117
+##  6 &quot;Sang bag Ploven, opus 10.4&quot;                                                                   89
+##  7 &quot;Musik til Helge Rodes skuespil \&quot;Moderen\&quot;, opus 41&quot;                                          87
+##  8 &quot;Silkesko over gylden Læst!, opus 6.3&quot;                                                         87
+##  9 &quot;Sænk kun dit Hoved, du Blomst, opus 21.4&quot;                                                     76
+## 10 &quot;Saul og David&quot;                                                                                75
+## # ℹ 241 more rows</code></pre>
 
 </div>
 </div>
