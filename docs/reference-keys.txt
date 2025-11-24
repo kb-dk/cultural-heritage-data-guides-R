@@ -9,12 +9,3 @@ initial-analysis
 handling-stopword
 keywords-in-context-kwic-analysis
 bigram-analysis
-loading-the-data-1
-loading-libraries-1
-load-data-1
-converting-to-tidy-text-format-1
-analysis-1
-initial-analysis-1
-handling-stopword-1
-keywords-in-context-kwic-analysis-1
-bigram-analysis-1
